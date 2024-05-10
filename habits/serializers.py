@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from habits.models import Habits
 from habits.validators import time_of_complete_limit, frequency_limit
-from validators import AssociatedHabitCompletedValidator
+from habits.validators import AssociatedHabitCompletedValidator
 
 
 class HabitsSerializer(serializers.ModelSerializer):
