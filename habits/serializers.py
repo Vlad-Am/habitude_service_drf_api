@@ -9,7 +9,8 @@ class HabitsSerializer(serializers.ModelSerializer):
     time_of_complete = serializers.IntegerField(validators=[time_of_complete_limit])
     frequency = serializers.IntegerField(validators=[frequency_limit])
 
-    associated_habit = serializers.CharField(validators=[AssociatedHabitCompletedValidator.check_sign_of_pleasant])
+    associated_habit = serializers.CharField(validators=[AssociatedHabitCompletedValidator.check_sign_of_pleasant],
+                                             allow_null=True, required=False)
 
     class Meta:
         model = Habits

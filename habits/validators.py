@@ -20,9 +20,15 @@ class AssociatedHabitCompletedValidator:
     requires_context = True
 
     @staticmethod
-    def check_sign_of_pleasant(sign_of_pleasant, serializer_field):
+    def check_sign_of_pleasant(serializer_field):
         """Если поле sign_of_pleasant = True, то поле associated_habit не может быть пустыми"""
-        if sign_of_pleasant is True and serializer_field.data.get('associated_habit') is None:
+        if (serializer_field.data.get("sign_of_pleasant") is True
+                and
+                serializer_field.data.get('associated_habit') is None):
+
             raise ValidationError('Укажите вознаграждение')
-        if sign_of_pleasant is False and serializer_field.data.get('associated_habit') is not None:
+        if (serializer_field.data.get("sign_of_pleasant") is False
+                and
+                serializer_field.data.get('associated_habit') is not None):
+
             raise ValidationError('Укажите признак наличия вознаграждения')
