@@ -12,7 +12,8 @@ class User(AbstractUser):
     token = models.CharField(max_length=100, verbose_name="token", **NULLABLE)
     is_active = models.BooleanField(default=True, verbose_name="is_active")
     city = models.CharField(max_length=50, verbose_name="city", **NULLABLE)
-
+    tg_name = models.CharField(max_length=50, verbose_name="tg_name", **NULLABLE)
+    tg_chat_id = models.CharField(max_length=50, verbose_name="tg_chat_id", **NULLABLE)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 

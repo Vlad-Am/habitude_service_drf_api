@@ -9,3 +9,12 @@ flake8==7.0.0
 pytz==2024.1
 setuptools==69.5.1
 
+pillow==10.3.0
+flake8==7.0.0
+ipython==8.24.0
+django-celery-beat==2.6.0
+requests==2.31.0
+celery==5.4.0
+eventlet==0.36.1
+redis==5.0.4
+

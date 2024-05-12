@@ -14,8 +14,13 @@ class Habits(models.Model):
                              verbose_name='Место выполнения привычки',
                              **NULLABLE)
 
-    time = models.DateTimeField(verbose_name='Время выполнения привычки',
-                                **NULLABLE)
+    time = models.TimeField(verbose_name='Время выполнения привычки',
+                            default="12:00:00")
+
+    data = models.DateField(auto_now=True,
+                            verbose_name='Дата создания привычки')
+
+    date_send_message = models.DateField(auto_now=True, verbose_name="Дата отправки сообщения")
 
     action = models.CharField(max_length=255,
                               verbose_name='Действие')

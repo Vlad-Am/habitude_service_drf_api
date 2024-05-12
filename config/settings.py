@@ -24,6 +24,9 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_yasg',
     'rest_framework',
+    'django_celery_beat',
+    "corsheaders",
+
     "users",
     "habits",
 
@@ -37,6 +40,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -112,3 +116,38 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
 }
+
+CORS_ALLOWED_ORIGINS = [*ALLOWED_HOSTS]  # Замените на адрес вашего фронтенд-сервера
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://read-and-write.example.com",  # Замените на адрес вашего фронтенд-сервера
+    # и добавьте адрес бэкенд-сервера
+]
+
+CORS_ALLOW_ALL_ORIGINS = False
+
+# URL-адрес брокера сообщений
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+# URL-адрес брокера результатов, также Redis
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# Часовой пояс для работы Celery
+CELERY_TIMEZONE = TIME_ZONE
+
+# Флаг отслеживания выполнения задач
+CELERY_TASK_TRACK_STARTED = True
+
+# Максимальное время на выполнение задачи
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'habits.tasks.send_tg_message',  # Путь к задаче
+        'schedule': timedelta(days=2),  # Расписание выполнения задачи (например, каждые 10 минут)
+    },
+}
+
+TELEGRAM_URL = "https://api.telegram.org/bot"
+
+API_OF_BOT = os.environ.get('TG_BOT_API_TOKEN')
