@@ -1,8 +1,7 @@
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 
 from habits.models import Habits
-from rest_framework import viewsets, status, generics
+from rest_framework import viewsets, generics
 
 from habits.paginators import HabitsPaginator
 from habits.serializers import HabitsSerializer
