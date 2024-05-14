@@ -17,12 +17,15 @@ class HabitsView(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
     def get_permissions(self):
-        if self.action == "create":
+        if self.action == ("create", "list"):
             self.permission_classes = (IsAuthenticated,)
-        if self.action in ("destroy", "update", "partial_update", "list"):
+        if self.action in ("destroy", "update", "partial_update"):
             self.permission_classes = (IsAuthenticated, IsOwner)
 
         return super().get_permissions()
+
+    def get_queryset(self):
+        return self.queryset.filter(owner=self.request.user)
 
 
 class HabitsPublicListAPIView(generics.ListAPIView):
