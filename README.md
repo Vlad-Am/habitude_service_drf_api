@@ -64,7 +64,7 @@
 Запустите Celery для обработки отложенных задач:
     
 	celery -A config worker -l INFO (для Windows добавить: -eventlet)
-	celery -A config beat -l info -S django
+	celery -A config beat -l info 
 
 Используйте команду csu для создания тестового суперпользователя
     
