@@ -5,6 +5,7 @@ from django.conf import settings
 
 from habits.models import Habits
 
+
 @shared_task
 def send_tg_message():
     """Функция определяет пользователя которому надо напомнить о выполнении привычки и отправляет ему соответсвующее
